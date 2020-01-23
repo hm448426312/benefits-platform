@@ -1,23 +1,36 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <template>
+      <router-view v-if="canload"></router-view>
+    </template>
   </div>
 </template>
 
 <script>
+import * as commonApi from '@/api/common/index'
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+      canload: false
+    }
+  },
+  mounted () {
+    this.getUserInfo()
+  },
+  methods: {
+    async getUserInfo () {
+      await new Promise((resolve, reject) => {
+        commonApi.getUserInfo().then(res => {
+          this.$store.commit('setUserInfo', res.data)
+          this.$nextTick(() => {
+            this.canload = true
+          })
+        }).finally(() => {
+          resolve()
+        })
+      })
+    }
+  }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

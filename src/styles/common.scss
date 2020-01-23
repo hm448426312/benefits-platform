@@ -1,0 +1,44 @@
+@import "./variable-layout";
+.base-main{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  .base-title{
+    height: 30px;
+    line-height: 30px;
+    border-left: 4px solid $menuActColor;
+    padding-left: 10px;
+  }
+  .base-content{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    margin-top: 20px;
+    .base-action{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      .base-btn,
+      .base-filter{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        > *{
+          margin-left: 10px;
+          margin-right: 0;
+          &:first-child{
+            margin-left: 0;
+          }
+        }
+      }
+    }
+    .base-table{
+      margin-top: 10px;
+    }
+    .base-pagination{
+      margin-top: 10px;
+      padding-right: 20px;
+      text-align: right;
+    }
+  }
+}

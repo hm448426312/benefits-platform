@@ -1,0 +1,132 @@
+[
+  {
+    "id": 1,
+    "name": "水果",
+    "children": [
+      {
+        "name": "苹果",
+        "id": 11,
+        "parentId": 1
+      },
+      {
+        "name": "香蕉",
+        "id": 12,
+        "parentId": 1
+      },
+      {
+        "name": "榴莲",
+        "id": 13,
+        "parentId": 1
+      },
+      {
+        "name": "西瓜",
+        "id": 14,
+        "parentId": 1
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "蔬菜",
+    "children": [
+      {
+        "name": "上海青",
+        "id": 21,
+        "parentId": 2
+      },
+      {
+        "name": "莴笋",
+        "id": 22,
+        "parentId": 2
+      },
+      {
+        "name": "油麦菜",
+        "id": 23,
+        "parentId": 2
+      },
+      {
+        "name": "西红柿",
+        "id": 24,
+        "parentId": 2
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "酒水",
+    "children": [
+      {
+        "name": "白酒",
+        "id": 31,
+        "parentId": 3
+      },
+      {
+        "name": "红酒",
+        "id": 32,
+        "parentId": 3
+      },
+      {
+        "name": "伏特加",
+        "id": 33,
+        "parentId": 3
+      },
+      {
+        "name": "啤酒",
+        "id": 34,
+        "parentId": 3
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "干果",
+    "children": [
+      {
+        "name": "核桃",
+        "id": 41,
+        "parentId": 4
+      },
+      {
+        "name": "海南果",
+        "id": 42,
+        "parentId": 4
+      },
+      {
+        "name": "开心果",
+        "id": 43,
+        "parentId": 4
+      },
+      {
+        "name": "瓜子",
+        "id": 44,
+        "parentId": 4
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "粮油",
+    "children": [
+      {
+        "name": "长粒米",
+        "id": 51,
+        "parentId": 5
+      },
+      {
+        "name": "东北大米",
+        "id": 52,
+        "parentId": 5
+      },
+      {
+        "name": "糯米",
+        "id": 53,
+        "parentId": 5
+      },
+      {
+        "name": "黑豆",
+        "id": 54,
+        "parentId": 5
+      }
+    ]
+  }
+]

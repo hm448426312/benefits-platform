@@ -1,0 +1,38 @@
+[
+  {
+    "name": "企业名称1",
+    "tel": 17345951171,
+    "address": "企业地址",
+    "legal": "法人-胡淼",
+    "businessNo": "1902-1",
+    "status": "auth-ed",
+    "id": 1
+  },
+  {
+    "name": "企业名称2",
+    "tel": 17345951171,
+    "address": "企业地址2",
+    "legal": "法人-胡淼2",
+    "businessNo": "1902-12",
+    "status": "auth-ing",
+    "id": 2
+  },
+  {
+    "name": "企业名称3",
+    "tel": 17345951171,
+    "address": "企业地址3",
+    "legal": "法人-胡淼3",
+    "businessNo": "1902-3",
+    "status": "auth-error",
+    "id": 3
+  },
+  {
+    "name": "企业名称4",
+    "tel": 17345951171,
+    "address": "企业地址4",
+    "legal": "法人-胡淼4",
+    "businessNo": "1902-4",
+    "status": "un-auth",
+    "id": 4
+  }
+]

@@ -1,2 +1,40 @@
 @import "./reset";
+@import "./common";
+@import "./el-cover";
 
+html{
+  min-width: 1024px;
+  margin: 0 auto;
+  overflow: auto;
+}
+.cursor-p{
+  cursor: pointer;
+}
+// 去掉ie浏览器输入框自带的x和眼睛图标
+::-ms-clear,
+::-ms-reveal {
+  display: none;
+}
+/* 更改placeholder默认样式 */
+::-webkit-input-placeholder {
+  color: #ccc;
+}
+/* chrome 滚动条 */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 12px;
+}
+
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+  background: #e7e8ef;
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  background: #727687;
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: #727687;
+}
