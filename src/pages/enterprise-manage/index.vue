@@ -20,7 +20,7 @@
               :value="item.value">
             </el-option>
           </el-select>
-          <el-input size="small" v-model="filter.name" placeholder="请输入企业名称" clearable></el-input>
+          <el-input size="small" v-model.trim="filter.name" placeholder="请输入企业名称" clearable></el-input>
           <el-button @click="getTableListData" size="small" type="default">查询</el-button>
           <el-button @click="resetTableListData" size="small" type="default">重置</el-button>
         </div>
@@ -71,7 +71,7 @@
           size="small"
           v-if="page.total && page.total > 0"
           @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
+          @current-change="handleCurrentPageChange"
           :current-page="page.currentPage"
           :page-sizes="page.pageSizes"
           :page-size="page.pageSize"
@@ -238,7 +238,7 @@ export default {
       // 获取数据
       this.getTableListData()
     },
-    handleCurrentChange (page) {
+    handleCurrentPageChange (page) {
       this.page.currentPage = page
       // 获取数据
       this.getTableListData()

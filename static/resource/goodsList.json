@@ -1,0 +1,47 @@
+[
+  {
+    "name": "红富士",
+    "id": 1,
+    "classify": {
+      "name": "水果",
+      "id": 1,
+      "subName": "苹果",
+      "subId": 11
+    },
+    "img": "",
+    "price": 8,
+    "sells": 6,
+    "unit": "g",
+    "unitValue": 500
+  },
+  {
+    "name": "蛇果",
+    "id": 2,
+    "classify": {
+      "name": "水果",
+      "id": 1,
+      "subName": "苹果",
+      "subId": 11
+    },
+    "img": "",
+    "price": 10,
+    "sells": 9,
+    "unit": "g",
+    "unitValue": 500
+  },
+  {
+    "name": "苹果1",
+    "id": 2,
+    "classify": {
+      "name": "水果",
+      "id": 1,
+      "subName": "苹果",
+      "subId": 11
+    },
+    "img": "",
+    "price": 5,
+    "sells": 4.5,
+    "unit": "g",
+    "unitValue": 500
+  }
+]

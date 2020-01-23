@@ -86,7 +86,7 @@
         </el-pagination>
       </div>
     </div>
-    <operation-goods
+    <operation-good-classify
       v-if="operationObj.showOperationDialog"
       :title="operationObj.title"
       :type="operationObj.type"
@@ -94,17 +94,17 @@
       :parentGood="operationObj.parentGood"
       @save-event="operationGoodClassifyCallBak"
       @cancel-event="operationObj.showOperationDialog = false"
-    ></operation-goods>
+    ></operation-good-classify>
   </div>
 </template>
 
 <script>
 import * as goodsApi from '@/api/goods/index'
-import OperationGoods from './operation-goods'
+import OperationGoodClassify from './operation-good-classify'
 
 export default {
   name: 'index',
-  components: {OperationGoods},
+  components: {OperationGoodClassify},
   data () {
     return {
       operationObj: {
@@ -297,7 +297,7 @@ export default {
     // 获取数据
     getTableListData () {
       const params = this.groupParams()
-      goodsApi.getGoodsList(params).then(res => {
+      goodsApi.getGoodsManageList(params).then(res => {
         this.tableData = res.data
         this.page.total = this.tableData.length
       })

@@ -19,10 +19,18 @@ export function getGoodsSubClassify (params) {
     params
   })
 }
+// 获取商品分类列表
+export function getGoodsManageList (params) {
+  return service({
+    url: `/static/resource/goodsManageList.json`,
+    type: 'GET',
+    params
+  })
+}
 // 获取商品列表
 export function getGoodsList (params) {
   return service({
-    url: `/static/resource/goodsManageList.json`,
+    url: `/static/resource/goodsList.json`,
     type: 'GET',
     params
   })

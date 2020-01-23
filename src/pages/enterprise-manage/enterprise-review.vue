@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-dialog width="500px" title="审核" :visible.sync="showReviewDialog" append-to-body>
+    <el-dialog :close-on-click-modal="false" :before-close="handleClose" width="500px" title="审核" :visible.sync="showReviewDialog" append-to-body>
       <el-form ref="reviewFormRef" :model="reviewForm" :rules="reviewRules">
         <el-form-item label="审核结果" :label-width="formLabelWidth">
           <el-radio-group v-model="reviewForm.status">
@@ -46,6 +46,9 @@ export default {
     }
   },
   methods: {
+    handleClose () {
+      this.handleOperationEnterprise('cancel')
+    },
     handleOperationEnterprise (type) {
       if (type === 'save') {
         this.$refs['reviewFormRef'].validate((valid) => {

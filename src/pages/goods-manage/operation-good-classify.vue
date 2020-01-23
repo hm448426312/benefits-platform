@@ -1,24 +1,24 @@
 <template>
     <div>
-      <el-dialog width="500px" :title="title" :visible.sync="showDialog" append-to-body>
+      <el-dialog :close-on-click-modal="false" :before-close="handleClose" width="500px" :title="title" :visible.sync="showDialog" append-to-body>
         <el-form ref="goodFormRef" :model="goodForm" :rules="goodRules">
           <template v-if="this.parentGood !== null">
             <el-form-item label="商品分类名称" prop="name" :label-width="formLabelWidth">
-              <el-input :disabled="true" clearable autofocus="true" v-model="goodForm.name" autocomplete="off"></el-input>
+              <el-input :disabled="true" clearable v-model.trim="goodForm.name" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="商品子类名称" prop="subName" :label-width="formLabelWidth">
-              <el-input clearable autofocus="true" v-model="goodForm.subName" autocomplete="off"></el-input>
+              <el-input clearable v-model.trim="goodForm.subName" autocomplete="off"></el-input>
             </el-form-item>
           </template>
           <template v-else>
             <el-form-item label="商品分类名称" prop="name" :label-width="formLabelWidth">
-              <el-input clearable autofocus="true" v-model="goodForm.name" autocomplete="off"></el-input>
+              <el-input clearable v-model.trim="goodForm.name" autocomplete="off"></el-input>
             </el-form-item>
           </template>
         </el-form>
         <div slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="handleOperationGood('save')">确定</el-button>
-          <el-button @click="handleOperationGood('cancel')">取消</el-button>
+          <el-button size="small" type="primary" @click="handleOperationGoodClassify('save')">确定</el-button>
+          <el-button size="small" @click="handleOperationGoodClassify('cancel')">取消</el-button>
         </div>
       </el-dialog>
     </div>
@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  name: 'operation-goods',
+  name: 'operation-good-classify',
   props: {
     title: { // add | edit
       type: String,
@@ -79,7 +79,10 @@ export default {
         this.goodForm.name = this.good.name || ''
       }
     },
-    handleOperationGood (type) {
+    handleClose () {
+      this.handleOperationGoodClassify('cancel')
+    },
+    handleOperationGoodClassify (type) {
       if (type === 'save') {
         this.$refs['goodFormRef'].validate((valid) => {
           if (valid) {
