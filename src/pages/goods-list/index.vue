@@ -9,34 +9,44 @@
           <el-button type="default" size="small">导出</el-button>
         </div>
         <div class="base-filter">
-          <el-select
-            v-model="filter.selectedClassify"
-            clearable
-            placeholder="全部"
-            @change="classifyChangeEvent"
-            size="small"
-          >
-            <el-option
-              v-for="item in classifyList"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id">
-            </el-option>
-          </el-select>
-          <el-select
-            v-model="filter.selectedSubClassify"
-            clearable
-            placeholder="全部"
-            size="small"
-          >
-            <el-option
-              v-for="item in subClassifyList"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id">
-            </el-option>
-          </el-select>
-          <el-input size="small" v-model.trim="filter.name" placeholder="请输入商品名称" clearable></el-input>
+          <div class="base-filter-list">
+            <span class="base-filter-list-label">商品大类</span>
+            <el-select
+              v-model="filter.selectedClassify"
+              clearable
+              placeholder="全部"
+              @change="classifyChangeEvent"
+              size="small"
+            >
+              <el-option
+                v-for="item in classifyList"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id">
+              </el-option>
+            </el-select>
+          </div>
+          <div class="base-filter-list">
+            <span class="base-filter-list-label">商品子类</span>
+            <el-select
+              v-model="filter.selectedSubClassify"
+              clearable
+              placeholder="全部"
+              size="small"
+            >
+              <el-option
+                v-for="item in subClassifyList"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id">
+              </el-option>
+            </el-select>
+          </div>
+
+          <div class="base-filter-list">
+            <span class="base-filter-list-label">商品名称</span>
+            <el-input size="small" v-model.trim="filter.name" placeholder="商品名称" clearable></el-input>
+          </div>
           <el-button @click="getTableListData" size="small" type="default">查询</el-button>
           <el-button @click="resetTableListData" size="small" type="default">重置</el-button>
         </div>
@@ -151,8 +161,7 @@ export default {
         order: ''
       },
       // 其他业务参数
-      selfParams: {
-      },
+      selfParams: {},
       // 表格数据
       tableData: [],
       // 表格表头数据
@@ -238,6 +247,8 @@ export default {
     // 初始化过滤参数
     initFilter () {
       this.filter.name = ''
+      this.filter.selectedClassify = ''
+      this.filter.selectedSubClassify = ''
     },
     // 初始化分页参数
     initPage () {
@@ -274,6 +285,7 @@ export default {
         this.sort.sort = ''
         this.sort.order = ''
       }
+      this.getTableListData()
     },
     // 组合参数
     groupParams () {

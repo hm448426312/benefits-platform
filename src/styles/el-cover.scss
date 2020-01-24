@@ -2,11 +2,12 @@
 .el-cover{
   .el-select,
   .el-input{
-    width: 150px;
+    width: 120px;
   }
 }
 .el-table td, .el-table th{
   padding: 0 0 0 0;
+  height: 40px;
 }
 .el-table-column--selection .cell{
   padding-left: 10px;

@@ -95,11 +95,11 @@ const router = [
       },
       {
         path: 'invoice-manage',
-        name: '发票管理',
+        name: '发票地址管理',
         component: (resolve) => require(['@/pages/invoice'], resolve),
         meta: {
           fullPath: '/page/invoice-manage',
-          title: '发票管理',
+          title: '发票地址管理',
           code: 'invoice-manage'
         }
       }

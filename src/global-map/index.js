@@ -30,11 +30,17 @@ export const rightRouter = {
     'invoice-manage' // 发票管理
   ]
 }
-
+// 认证状态
 export const authStatus = {
   unAuth: 'un-auth', // 未认证
   authIng: 'auth-ing', // 认证中
   authEd: 'auth-ed', // 认证成功
   authError: 'auth-error', // 认证失败
   stopUse: 'disabled'
+}
+// 支付状态
+export const payStatus = {
+  unPay: 'un-pay', // 未支付
+  payEd: 'pay-ed', // 已支付
+  noPay: 'pay-cancel' // 已取消
 }

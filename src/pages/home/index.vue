@@ -24,6 +24,7 @@ export default {
 <style lang="scss" scoped>
   @import "@/styles/variable-layout";
   .home-content{
-    min-height: $homeContentHeight;
+    min-height: $layoutContentHeight;
+    margin-top: $headerHeight;
   }
 </style>

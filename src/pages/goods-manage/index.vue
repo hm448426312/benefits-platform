@@ -10,18 +10,21 @@
           </el-button>
         </div>
         <div class="base-filter">
-          <el-select
-            v-model="filter.selectedGoodClassify"
-            clearable placeholder="全部"
-            size="small"
-          >
-            <el-option
-              v-for="item in goodsClassify"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id">
-            </el-option>
-          </el-select>
+          <div class="base-filter-list">
+            <span class="base-filter-list-label">商品大类</span>
+            <el-select
+              v-model="filter.selectedGoodClassify"
+              clearable placeholder="全部"
+              size="small"
+            >
+              <el-option
+                v-for="item in goodsClassify"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id">
+              </el-option>
+            </el-select>
+          </div>
           <el-button @click="getTableListData" size="small" type="default">查询</el-button>
           <el-button @click="resetTableListData" size="small" type="default">重置</el-button>
         </div>
@@ -281,6 +284,7 @@ export default {
         this.sort.sort = ''
         this.sort.order = ''
       }
+      this.getTableListData()
     },
     // 组合参数
     groupParams () {

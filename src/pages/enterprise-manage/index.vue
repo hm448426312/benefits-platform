@@ -7,20 +7,26 @@
 
         </div>
         <div class="base-filter">
-          <el-select
-            v-model="filter.selectedEnterpriseStatus"
-            clearable
-            placeholder="全部"
-            size="small"
-          >
-            <el-option
-              v-for="item in enterpriseStatus"
-              :key="item.value"
-              :label="item.name"
-              :value="item.value">
-            </el-option>
-          </el-select>
-          <el-input size="small" v-model.trim="filter.name" placeholder="请输入企业名称" clearable></el-input>
+          <div class="base-filter-list">
+            <span class="base-filter-list-label">状态</span>
+            <el-select
+              v-model="filter.selectedEnterpriseStatus"
+              clearable
+              placeholder="全部"
+              size="small"
+            >
+              <el-option
+                v-for="item in enterpriseStatus"
+                :key="item.value"
+                :label="item.name"
+                :value="item.value">
+              </el-option>
+            </el-select>
+          </div>
+          <div class="base-filter-list">
+            <span class="base-filter-list-label">企业名称</span>
+            <el-input size="small" v-model.trim="filter.name" placeholder="企业名称" clearable></el-input>
+          </div>
           <el-button @click="getTableListData" size="small" type="default">查询</el-button>
           <el-button @click="resetTableListData" size="small" type="default">重置</el-button>
         </div>
@@ -254,6 +260,7 @@ export default {
         this.sort.sort = ''
         this.sort.order = ''
       }
+      this.getTableListData()
     },
     // 组合参数
     groupParams () {
