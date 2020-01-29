@@ -9,6 +9,7 @@ export const rightRouter = {
     'enterprise-manage', // 企业管理
     'goods-list', // 商品列表
     'order-list', // 订单列表
+    'address-manage', // 收件地址管理
     'invoice-manage' // 发票管理
   ],
   // 渠道
@@ -18,6 +19,7 @@ export const rightRouter = {
     'user-center-auth', // 企业认证
     'enterprise-manage', // 企业管理
     'order-list', // 订单列表
+    'address-manage', // 收件地址管理
     'invoice-manage' // 发票管理
   ],
   // 企业
@@ -27,6 +29,7 @@ export const rightRouter = {
     'user-center-auth', // 企业认证
     'goods-list', // 商品列表
     'order-list', // 订单列表
+    'address-manage', // 收件地址管理
     'invoice-manage' // 发票管理
   ]
 }
@@ -43,4 +46,10 @@ export const payStatus = {
   unPay: 'un-pay', // 未支付
   payEd: 'pay-ed', // 已支付
   noPay: 'pay-cancel' // 已取消
+}
+// 发票状态
+export const invoiceStatus = {
+  unInvoice: 'un-invoice', // 未开票
+  invoiceIng: 'invoice-ing', // 审核中
+  invoiceEd: 'invoice-ed' // 已寄出
 }

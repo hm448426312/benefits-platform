@@ -167,6 +167,9 @@ export default {
   methods: {
     deleteGood (good, index) {
       this.tableData.splice(index, 1)
+      if (this.selectedGood && good === this.selectedGood) {
+        this.selectedGood = null
+      }
       this.$message({
         message: '删除成功',
         type: 'success'

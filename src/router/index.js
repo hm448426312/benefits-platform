@@ -94,12 +94,22 @@ const router = [
         }
       },
       {
+        path: 'address-manage',
+        name: '收件地址管理',
+        component: (resolve) => require(['@/pages/address'], resolve),
+        meta: {
+          fullPath: '/page/address-manage',
+          title: '收件地址管理',
+          code: 'address-manage'
+        }
+      },
+      {
         path: 'invoice-manage',
-        name: '发票地址管理',
+        name: '发票抬头管理',
         component: (resolve) => require(['@/pages/invoice'], resolve),
         meta: {
           fullPath: '/page/invoice-manage',
-          title: '发票地址管理',
+          title: '发票抬头管理',
           code: 'invoice-manage'
         }
       }

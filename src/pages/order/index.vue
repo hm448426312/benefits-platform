@@ -4,10 +4,11 @@
     <div class="base-content">
       <div class="base-action">
         <div class="base-btn">
+          <el-button size="small" type="primary" :disabled="checkedRow.length === 0" @click="openInvoice()">批量开发票</el-button>
         </div>
         <div class="base-filter">
           <div class="base-filter-list">
-            <span class="base-filter-list-label">状态</span>
+            <span class="base-filter-list-label">订单状态</span>
             <el-select
               v-model="filter.status"
               clearable
@@ -47,12 +48,13 @@
           ref="myTable"
           :data="tableData"
           @sort-change="sortChange"
+          @selection-change="handleSelectionChange"
           style="width: 100%"
           max-height="400px"
         >
           <!-- tableHeader循环外可加序号列、复选框列等 -->
-          <!--          <el-table-column type="selection" width="55"> </el-table-column>-->
-          <el-table-column type="index" label="序号" width="55"></el-table-column>
+          <el-table-column :selectable='tableCheckInit' type="selection" width="55"> </el-table-column>
+<!--          <el-table-column type="index" label="序号" width="55"></el-table-column>-->
           <template v-for="(header, index) of tableHeader">
             <el-table-column
               v-bind:key="index"
@@ -71,11 +73,39 @@
                     @click="toPay(scope.row, scope.$index)"
                   >去支付
                   </el-button>
+                  <template v-if="scope.row['invoiceStatus'] === invoiceStatus.unInvoice">
+                    <el-button
+                      v-if="scope.row['status'] === payStatus.payEd"
+                      type="text"
+                      @click="openInvoice(scope.row, scope.$index)"
+                    >开发票
+                    </el-button>
+                  </template>
+                  <template v-else-if="scope.row['invoiceStatus'] === invoiceStatus.invoiceEd">
+                    <el-button
+                      type="text"
+                      @click="viewExpress(scope.row, scope.$index)"
+                    >查看快递
+                    </el-button>
+                  </template>
+                  <template v-else>
+                    <el-button
+                      type="text"
+                      @click="getBackInvoice(scope.row, scope.$index)"
+                    >收回
+                    </el-button>
+                  </template>
                 </template>
                 <template v-else-if="header.field === 'status'">
                   <span v-if="scope.row[header.field] === payStatus.payEd">已支付</span>
                   <span v-else-if="scope.row[header.field] === payStatus.unPay">未支付</span>
                   <span v-else>已取消</span>
+                </template>
+                <template v-else-if="header.field === 'invoiceStatus'">
+                  <span v-if="scope.row[header.field] === invoiceStatus.unInvoice">未开票</span>
+                  <span v-else-if="scope.row[header.field] === invoiceStatus.invoiceEd">已寄出</span>
+                  <span v-else-if="scope.row[header.field] === invoiceStatus.invoiceIng">审核中</span>
+                  <span v-else>--</span>
                 </template>
                 <template v-else>
                   <span>{{scope.row[header.field] || '--'}}</span>
@@ -120,8 +150,10 @@ export default {
   data () {
     return {
       payStatus: globalMap.payStatus,
+      invoiceStatus: globalMap.invoiceStatus,
       selectedOrder: null,
       showOperationDialog: false,
+      checkedRow: [],
       pickerOptions: {
         disabledDate (time) {
           return time.getTime() > Date.now()
@@ -202,17 +234,23 @@ export default {
         {
           field: 'orderPrice',
           label: '订单金额(元)',
-          sortable: 'custom' // 排序
+          sortable: 'custom', // 排序
+          align: 'right'
         },
         {
           field: 'status',
-          label: '状态',
+          label: '订单状态',
+          sortable: 'custom' // 排序
+        },
+        {
+          field: 'invoiceStatus',
+          label: '开票状态',
           sortable: 'custom' // 排序
         },
         {
           field: 'action',
           label: '操作',
-          width: '150px' // 操作列一般固定宽度
+          width: '200px' // 操作列一般固定宽度
         }
       ]
     }
@@ -224,9 +262,35 @@ export default {
     this.getTableListData()
   },
   methods: {
+    // 收回发票
+    getBackInvoice (row, index) {
+
+    },
+    // 查看物流
+    viewExpress (row, index) {
+
+    },
+    // 开发票
+    openInvoice (row, index) {
+      if (arguments.length === 0) {
+        // 批量开具发票
+        console.log('批量开具发票')
+      } else {
+        console.log('单独开具发票')
+      }
+    },
+    // 去支付
     toPay (row, index) {
 
     },
+    tableCheckInit (row, index) {
+      if (row.status === this.payStatus.payEd && row.invoiceStatus === this.invoiceStatus.unInvoice) {
+        return true
+      } else {
+        return false
+      }
+    },
+    // 日期范围改变事件
     dateRangeChangeEvent () {
       if (this.selectedDateRange) {
         this.filter.startTime = this.selectedDateRange[0]
@@ -235,6 +299,10 @@ export default {
         this.filter.startTime = ''
         this.filter.endTime = ''
       }
+    },
+    handleSelectionChange (val) {
+      this.checkedRow = val
+      console.log(this.checkedRow)
     },
     // 初始化过滤参数
     initFilter () {

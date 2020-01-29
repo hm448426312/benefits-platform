@@ -2,10 +2,10 @@
   <div>
     <el-dialog :close-on-click-modal="false" :before-close="handleClose" width="500px" title="审核" :visible.sync="showReviewDialog" append-to-body>
       <el-form ref="reviewFormRef" :model="reviewForm" :rules="reviewRules">
-        <el-form-item label="审核结果" :label-width="formLabelWidth">
+        <el-form-item label="审核结果" prop="status" :label-width="formLabelWidth">
           <el-radio-group v-model="reviewForm.status">
-            <el-radio label="pass">通过</el-radio>
-            <el-radio label="reject">驳回</el-radio>
+            <el-radio size="small" label="pass">通过</el-radio>
+            <el-radio size="small" label="reject">驳回</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="审核理由" prop="desc" :label-width="formLabelWidth">
@@ -16,8 +16,8 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="handleOperationEnterprise('save')">确定</el-button>
-        <el-button @click="handleOperationEnterprise('cancel')">取消</el-button>
+        <el-button size="small" type="primary" @click="handleOperationEnterprise('save')">确定</el-button>
+        <el-button size="small" @click="handleOperationEnterprise('cancel')">取消</el-button>
       </div>
     </el-dialog>
   </div>
@@ -38,6 +38,9 @@ export default {
         desc: ''
       },
       reviewRules: {
+        status: [
+          {required: true, message: '请输入理由', trigger: 'change'}
+        ],
         desc: [
           {required: true, message: '请输入理由', trigger: 'blur'},
           { min: 2, max: 30, message: '长度在 2 到 30 个字符', trigger: 'blur' }

@@ -83,7 +83,7 @@ export default {
       padding-left: 20px;
       border-bottom: 1px solid #eee;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 14px;
       &.active{
         background-color: $menuActColor;
         color: #fff;

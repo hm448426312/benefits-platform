@@ -4,15 +4,15 @@
         <el-form ref="goodFormRef" :model="goodForm" :rules="goodRules">
           <template v-if="this.parentGood !== null">
             <el-form-item label="商品分类名称" prop="name" :label-width="formLabelWidth">
-              <el-input :disabled="true" clearable v-model.trim="goodForm.name" autocomplete="off"></el-input>
+              <el-input size="small" :disabled="true" clearable v-model.trim="goodForm.name" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="商品子类名称" prop="subName" :label-width="formLabelWidth">
-              <el-input clearable v-model.trim="goodForm.subName" autocomplete="off"></el-input>
+              <el-input size="small" clearable v-model.trim="goodForm.subName" autocomplete="off"></el-input>
             </el-form-item>
           </template>
           <template v-else>
             <el-form-item label="商品分类名称" prop="name" :label-width="formLabelWidth">
-              <el-input clearable v-model.trim="goodForm.name" autocomplete="off"></el-input>
+              <el-input size="small" clearable v-model.trim="goodForm.name" autocomplete="off"></el-input>
             </el-form-item>
           </template>
         </el-form>

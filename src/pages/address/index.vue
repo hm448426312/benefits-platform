@@ -1,15 +1,11 @@
 <template>
   <div class="base-main">
-    <div class="base-title">发票抬头管理</div>
+    <div class="base-title">收件地址管理</div>
     <div class="base-content">
       <div class="base-action">
         <div class="base-btn">
-          <el-button size="small" type="primary" @click="addInvoiceEvent">新增发票抬头</el-button>
+          <el-button size="small" type="primary" @click="addAddressEvent">新增收件地址</el-button>
         </div>
-       <!-- <div class="base-filter">
-          <el-button @click="getTableListData" size="small" type="default">查询</el-button>
-          <el-button @click="resetTableListData" size="small" type="default">重置</el-button>
-        </div>-->
       </div>
       <div class="base-table">
         <el-table
@@ -22,7 +18,7 @@
         >
           <!-- tableHeader循环外可加序号列、复选框列等 -->
           <el-table-column type="selection" width="55"> </el-table-column>
-<!--          <el-table-column type="index" label="序号" width="55"></el-table-column>-->
+          <!--          <el-table-column type="index" label="序号" width="55"></el-table-column>-->
           <template v-for="(header, index) of tableHeader">
             <el-table-column
               v-bind:key="index"
@@ -37,7 +33,7 @@
                 <template v-if="header.field === 'action'">
                   <el-button
                     type="text"
-                    @click="editInvoiceEvent(scope.row, scope.$index)"
+                    @click="editAddressEvent(scope.row, scope.$index)"
                   >编辑
                   </el-button>
                   <el-button
@@ -45,6 +41,9 @@
                     @click="deleteRow(scope.row, scope.$index)"
                   >删除
                   </el-button>
+                </template>
+                <template v-else-if="header.field === 'address'">
+                  <span>{{getAddressDetail(scope.row)}}</span>
                 </template>
                 <template v-else>
                   <span>{{scope.row[header.field] || '--'}}</span>
@@ -70,29 +69,29 @@
         </el-pagination>
       </div>
     </div>
-    <operation-invoice
+    <operation-address
       v-if="operationData.showDialog"
       :title="operationData.title"
-      :invoice="operationData.invoice"
-      @save-event="operationInvoiceCallBak"
+      :address="operationData.address"
+      @save-event="operationAddressCallBak"
       @cancel-event="operationData.showDialog = false"
-    ></operation-invoice>
+    ></operation-address>
   </div>
 </template>
 
 <script>
-import * as invoiceApi from '@/api/invoice/index'
-import OperationInvoice from './operation-invoice'
+import * as addressApi from '@/api/address/index'
+import OperationAddress from './operation-address'
 
 export default {
   name: 'index',
-  components: {OperationInvoice},
+  components: {OperationAddress},
   data () {
     return {
       selectedOrder: null,
       operationData: {
         showDialog: false,
-        title: '新增发票抬头',
+        title: '新增收件地址',
         invoice: null
       },
       checkedRow: [],
@@ -119,17 +118,17 @@ export default {
       // 表格表头数据
       tableHeader: [
         {
-          field: 'invoiceTitle', // 列key
-          label: '发票抬头' // 列头显示文本
-          // sortable: 'custom' // 排序
+          field: 'recipient',
+          label: '收件人'
         },
         {
-          field: 'dutyNumber',
-          label: '发票税号'
+          field: 'tel',
+          label: '联系电话'
         },
         {
-          field: 'bank',
-          label: '开户行'
+          field: 'address', // 列key
+          label: '详细地址', // 列头显示文本
+          width: '500px'
         },
         {
           field: 'action',
@@ -146,6 +145,10 @@ export default {
     this.getTableListData()
   },
   methods: {
+    getAddressDetail (row) {
+      const url = `${row.province}${row.city}${row.county}${row.des}`
+      return url
+    },
     // 删除
     deleteRow (row, index) {
       if (this.tableData.length === 1) {
@@ -154,18 +157,18 @@ export default {
       this.getTableListData()
     },
     // 编辑发票抬头点击事件
-    editInvoiceEvent (row, index) {
-      this.operationData.title = '编辑发票抬头'
-      this.operationData.invoice = row
+    editAddressEvent (row, index) {
+      this.operationData.title = '编辑收件地址'
+      this.operationData.address = row
       this.operationData.showDialog = true
     },
     // 新增发票抬头点击事件
-    addInvoiceEvent () {
-      this.operationData.title = '新增发票抬头'
-      this.operationData.invoice = null
+    addAddressEvent () {
+      this.operationData.title = '新增收件地址'
+      this.operationData.address = null
       this.operationData.showDialog = true
     },
-    operationInvoiceCallBak (invoice) {
+    operationAddressCallBak (address) {
       this.operationData.showDialog = false
     },
     // 初始化过滤参数
@@ -227,7 +230,7 @@ export default {
     // 获取数据
     getTableListData () {
       const params = this.groupParams()
-      invoiceApi.getInvoiceList(params).then(res => {
+      addressApi.getAddressList(params).then(res => {
         this.tableData = res.data
         this.page.total = this.tableData.length
       })
